@@ -20,4 +20,7 @@ module.exports = function (app) {
 
   // Finish by binding the article middleware
   app.param('articleId', articles.articleByID);
+
+  app.route('/api/articles_search')
+    .get(articles.search); // Search API
 };

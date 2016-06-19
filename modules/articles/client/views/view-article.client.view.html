@@ -1,8 +1,86 @@
 <section>
   <div class="page-header">
-    <h1 ng-bind="vm.article.title"></h1>
+    <h1>View</h1>
   </div>
-  <div class="pull-right" ng-show="vm.article.isCurrentUserOwner">
+  <div class="col-md-4">
+    <form name="vm.form.articleForm" class="form-horizontal" ng-submit="vm.save(vm.form.articleForm.$valid)" novalidate>
+      <fieldset>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="record">Record</label>
+          <input name="record" type="text" ng-model="vm.article.record" id="record" class="form-control" placeholder="Record" required disabled>
+          <div ng-messages="vm.form.articleForm.record.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Record is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="ordinate">Ordinate</label>
+          <input name="ordinate" type="text" ng-model="vm.article.ordinate" id="ordinate" class="form-control" placeholder="Ordinate" disabled>
+          <div ng-messages="vm.form.articleForm.ordinate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Ordinate is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="title">Title</label>
+          <input name="title" type="text" ng-model="vm.article.title" id="title" class="form-control" placeholder="Title" disabled>
+          <div ng-messages="vm.form.articleForm.title.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Title is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="genus">Genus</label>
+          <input name="genus" type="text" ng-model="vm.article.genus" id="genus" class="form-control" placeholder="Genus" disabled>
+          <div ng-messages="vm.form.articleForm.genus.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Genus is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="species">Species</label>
+          <input name="species" type="text" ng-model="vm.article.species" id="species" class="form-control" placeholder="Species" disabled>
+          <div ng-messages="vm.form.articleForm.species.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Species is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="animal">Animal</label>
+          <input name="animal" type="text" ng-model="vm.article.animal" id="animal" class="form-control" placeholder="Animal" disabled>
+          <div ng-messages="vm.form.articleForm.animal.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Animal is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="name">Name</label>
+          <textarea name="name" data-ng-model="vm.article.name" id="name" class="form-control" cols="30" rows="2" placeholder="Name" disabled></textarea>
+        </div>
+        <!--
+        <div class="form-group">
+          <label class="control-label" for="content">Content</label>
+          <textarea name="content" data-ng-model="vm.article.content" id="content" class="form-control" cols="30" rows="2" placeholder="Content"></textarea>
+        </div>
+        -->
+
+        <div class="form-group">
+          <label class="control-label" for="notes">Notes</label>
+          <textarea name="content" data-ng-model="vm.article.notes" id="notes" class="form-control" cols="30" rows="2" placeholder="Notes" disabled></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="reference">Reference</label>
+          <textarea name="reference" data-ng-model="vm.article.reference" id="reference" class="form-control" cols="30" rows="2" placeholder="Reference" disabled></textarea>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+    <div class="pull-right" ng-if = "shouldRender()" > <!--ng-show="vm.article.isCurrentUserOwner" -->
     <a class="btn btn-primary" ui-sref="articles.edit({ articleId: vm.article._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
@@ -10,14 +88,5 @@
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
-  <small>
-    <em class="text-muted">
-      Posted on
-      <span ng-bind="vm.article.created | date:'mediumDate'"></span>
-      by
-      <span ng-if="vm.article.user" ng-bind="vm.article.user.displayName"></span>
-      <span ng-if="!vm.article.user">Deleted User</span>
-    </em>
-  </small>
-  <p class="lead" ng-bind="vm.article.content"></p>
 </section>
+

@@ -20,14 +20,41 @@ var ArticleSchema = new Schema({
     trim: true,
     required: 'Title cannot be blank'
   },
-  content: {
-    type: String,
-    default: '',
-    trim: true
-  },
   user: {
     type: Schema.ObjectId,
     ref: 'User'
+  },  //  Record
+  record: {
+    type: String,
+    default: ''
+  },
+  name: {
+    type: String,
+    default: ''
+  },
+  ordinate: {
+    type: String,
+    default: ''
+  },
+  genus: {
+    type: String,
+    default: ''
+  },
+  species: {
+    type: String,
+    default: ''
+  },
+  animal: {
+    type: String,
+    default: ''
+  },
+  notes: {
+    type: String,
+    default: ''
+  },
+  reference: {
+    type: String,
+    default: ''
   }
 });
 

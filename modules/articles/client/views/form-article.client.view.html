@@ -1,24 +1,84 @@
 <section>
   <div class="page-header">
-    <h1>{{vm.article._id ? 'Edit Article' : 'New Article'}}</h1>
+    <h1>{{vm.article._id ? 'Edit Data' : 'Data Entry'}}</h1>
   </div>
-  <div class="col-md-12">
+  <div class="col-md-4">
     <form name="vm.form.articleForm" class="form-horizontal" ng-submit="vm.save(vm.form.articleForm.$valid)" novalidate>
       <fieldset>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="record">Record</label>
+          <input name="record" type="text" ng-model="vm.article.record" id="record" class="form-control" placeholder="Record" required>
+          <div ng-messages="vm.form.articleForm.record.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Record is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="ordinate">Ordinate</label>
+          <input name="ordinate" type="text" ng-model="vm.article.ordinate" id="ordinate" class="form-control" placeholder="Ordinate" required>
+          <div ng-messages="vm.form.articleForm.ordinate.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Ordinate is required.</p>
+          </div>
+        </div>
+
         <div class="form-group" show-errors>
           <label class="control-label" for="title">Title</label>
           <input name="title" type="text" ng-model="vm.article.title" id="title" class="form-control" placeholder="Title" required>
           <div ng-messages="vm.form.articleForm.title.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Article title is required.</p>
+            <p class="help-block error-text" ng-message="required">Title is required.</p>
           </div>
         </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="genus">Genus</label>
+          <input name="genus" type="text" ng-model="vm.article.genus" id="genus" class="form-control" placeholder="Genus" required>
+          <div ng-messages="vm.form.articleForm.genus.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Genus is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="species">Species</label>
+          <input name="species" type="text" ng-model="vm.article.species" id="species" class="form-control" placeholder="Species" required>
+          <div ng-messages="vm.form.articleForm.species.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Species is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group" show-errors>
+          <label class="control-label" for="animal">Animal</label>
+          <input name="animal" type="text" ng-model="vm.article.animal" id="animal" class="form-control" placeholder="Animal" required>
+          <div ng-messages="vm.form.articleForm.animal.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Animal is required.</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="name">Name</label>
+          <textarea name="name" data-ng-model="vm.article.name" id="name" class="form-control" cols="30" rows="2" placeholder="Name"></textarea>
+        </div>
+        <!--
         <div class="form-group">
           <label class="control-label" for="content">Content</label>
-          <textarea name="content" data-ng-model="vm.article.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+          <textarea name="content" data-ng-model="vm.article.content" id="content" class="form-control" cols="30" rows="2" placeholder="Content"></textarea>
         </div>
+        -->
+
+        <div class="form-group">
+          <label class="control-label" for="notes">Notes</label>
+          <textarea name="content" data-ng-model="vm.article.notes" id="notes" class="form-control" cols="30" rows="2" placeholder="Notes"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="reference">Reference</label>
+          <textarea name="reference" data-ng-model="vm.article.reference" id="reference" class="form-control" cols="30" rows="2" placeholder="Reference"></textarea>
+        </div>
+
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.article._id ? 'Update' : 'Create'}}</button>
         </div>
+
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
         </div>

@@ -9,7 +9,7 @@
 
   function menuConfig(menuService) {
     menuService.addMenuItem('topbar', {
-      title: 'Articles',
+      title: 'Data',
       state: 'articles',
       type: 'dropdown',
       roles: ['*']
@@ -17,13 +17,13 @@
 
     // Add the dropdown list item
     menuService.addSubMenuItem('topbar', 'articles', {
-      title: 'List Articles',
+      title: 'Explore Data',
       state: 'articles.list'
     });
 
     // Add the dropdown create item
     menuService.addSubMenuItem('topbar', 'articles', {
-      title: 'Create Article',
+      title: 'Create Data',
       state: 'articles.create',
       roles: ['user']
     });

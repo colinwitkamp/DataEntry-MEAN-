@@ -44,10 +44,23 @@ exports.read = function (req, res) {
  * Update an article
  */
 exports.update = function (req, res) {
+  //  Check if User's role is not 'admin'
+  if (req.user.roles.indexOf('admin') < 0) {
+    return res.status(400).send({
+      message: 'The user is not an Admininistrator.'
+    });
+  }
   var article = req.article;
 
+  article.record = req.body.record;
+  article.ordinate = req.body.ordinate;
   article.title = req.body.title;
-  article.content = req.body.content;
+  article.name = req.body.name;
+  article.genus = req.body.genus;
+  article.species = req.body.species;
+  article.animal = req.body.animal;
+  article.notes = req.body.notes;
+  article.reference = req.body.reference;
 
   article.save(function (err) {
     if (err) {
@@ -64,6 +77,12 @@ exports.update = function (req, res) {
  * Delete an article
  */
 exports.delete = function (req, res) {
+  //  Check if User's role is not 'admin'
+  if (req.user.roles.indexOf('admin') < 0) {
+    return res.status(400).send({
+      message: 'The user is not an Admininistrator.'
+    });
+  }
   var article = req.article;
 
   article.remove(function (err) {
@@ -93,10 +112,54 @@ exports.list = function (req, res) {
 };
 
 /**
- * Article middleware
+* Search Articles : Search API
+*/
+exports.search = function(req, res) {
+  var field = req.query.field;
+  var search_string = new RegExp('.*' + req.query.search + '.*', "i");
+
+  console.log('field:' + req);
+  console.log('search:' + search_string);
+  var search_dic = {};
+  var query;
+  if (field === 'all') { // If you want to search over all fields or query is applied
+    search_dic = {
+      $or: [
+        {
+          record: search_string
+        }, {
+          ordinate: search_string
+        }, {
+          title: search_string
+        }, {
+          genus: search_string
+        }, {
+          species: search_string
+        }, {
+          animal: search_string
+        }, {
+          name: search_string
+        }, {
+          notes: search_string
+        }, {
+          reference: search_string
+        }
+      ]
+    };
+  } else {
+    search_dic[field] = search_string; // Build search query
+  }
+  Article.find(search_dic, function(err, doc) {
+    res.json(doc); // Retrieve the articles by json.
+  });
+
+
+};
+
+/**
+ * Article middleware --Retrieve Articles from MongoDB
  */
 exports.articleByID = function (req, res, next, id) {
-
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
       message: 'Article is invalid'

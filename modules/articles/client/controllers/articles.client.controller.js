@@ -20,7 +20,15 @@
     // Remove existing Article
     function remove() {
       if ($window.confirm('Are you sure you want to delete?')) {
-        vm.article.$remove($state.go('articles.list'));
+        vm.article.$remove(successCallback, errorCallback);
+      }
+
+      function successCallback(res) {
+        $state.go('articles.list');
+      }
+
+      function errorCallback(res) {
+        vm.error = res.data.message;
       }
     }
 
@@ -46,6 +54,14 @@
 
       function errorCallback(res) {
         vm.error = res.data.message;
+      }
+    }
+
+    function shouldRenderMenu() {
+      if (vm.authentication.user.roles.indexOf('admin' > 0)) {
+        return true;
+      } else {
+        return false;
       }
     }
   }
