@@ -58,6 +58,9 @@
     }
 
     vm.shouldRenderMenu = function() {
+      if (!vm.authentication) {
+        return false;
+      }
       if (vm.authentication.user.roles.indexOf('admin') >= 0) {
         return true;
       } else {
