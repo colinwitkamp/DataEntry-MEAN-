@@ -57,7 +57,7 @@
       }
     }
 
-    function shouldRenderMenu() {
+    vm.shouldRenderMenu = function() {
       if (vm.authentication.user.roles.indexOf('admin' >= 0)) {
         return true;
       } else {

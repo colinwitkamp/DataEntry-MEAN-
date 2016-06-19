@@ -80,7 +80,7 @@
       </fieldset>
     </form>
   </div>
-    <div class="pull-right" ng-if = "shouldRenderMenu()" > <!--ng-show="vm.article.isCurrentUserOwner" -->
+    <div class="pull-right" ng-if = "vm.shouldRenderMenu()" > <!--ng-show="vm.article.isCurrentUserOwner" -->
     <a class="btn btn-primary" ui-sref="articles.edit({ articleId: vm.article._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
