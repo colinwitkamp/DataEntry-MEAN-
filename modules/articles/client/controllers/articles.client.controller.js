@@ -5,12 +5,26 @@
     .module('articles')
     .controller('ArticlesController', ArticlesController);
 
-  ArticlesController.$inject = ['$scope', '$state', 'articleResolve', '$window', 'Authentication'];
+  ArticlesController.$inject = ['$scope', '$rootScope', '$state', 'articleResolve', '$window', 'Authentication'];
 
-  function ArticlesController($scope, $state, article, $window, Authentication) {
+  function ArticlesController($scope, $rootScope, $state, article, $window, Authentication) {
     var vm = this;
 
     vm.article = article;
+    if ($rootScope.article) {
+      vm.article.record = $rootScope.article.record;
+      vm.article.ordinate = $rootScope.article.ordinate;
+      vm.article.title = $rootScope.article.title;
+      vm.article.genus = $rootScope.article.genus;
+      vm.article.species = $rootScope.article.species;
+      vm.article.animal = $rootScope.article.animal;
+      vm.article.name = $rootScope.article.name;
+      vm.article.notes = $rootScope.article.notes;
+      vm.article.reference = $rootScope.article.reference;
+      $rootScope.article = null; // remove it
+    }
+
+
     vm.authentication = Authentication;
     vm.error = null;
     vm.form = {};
@@ -56,6 +70,11 @@
         vm.error = res.data.message;
       }
     }
+
+    vm.CopyAndEdit = function() {
+      $rootScope.article = vm.article;
+      $state.go('articles.create');
+    };
 
     vm.shouldRenderMenu = function() {
       if (!vm.authentication) {

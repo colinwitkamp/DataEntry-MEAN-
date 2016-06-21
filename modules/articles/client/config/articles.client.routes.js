@@ -36,6 +36,20 @@
           pageTitle: 'Articles Create'
         }
       })
+      .state('articles.copyedit', {
+        url: '/:articleId/copyedit',
+        templateUrl: 'modules/articles/client/views/form-article.client.view.html',
+        controller: 'ArticlesController',
+        controllerAs: 'vm',
+        resolve: {
+          articleResolve: newArticle,
+          articleCopyResolve: getArticle
+        },
+        data: {
+          roles: ['user', 'admin'],
+          pageTitle: 'Articles Create'
+        }
+      })
       .state('articles.edit', {
         url: '/:articleId/edit',
         templateUrl: 'modules/articles/client/views/form-article.client.view.html',
